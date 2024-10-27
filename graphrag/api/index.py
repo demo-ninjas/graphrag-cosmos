@@ -60,7 +60,7 @@ async def build_index(
 
     # TODO: must update filepath of lancedb (if used) until the new config engine has been implemented
     # TODO: remove the type ignore annotations below once the new config engine has been refactored
-    vector_store_type = config.embeddings.vector_store["type"]  # type: ignore
+    vector_store_type = config.embeddings.vector_store["type"] if config.embeddings.vector_store is not None else None  # type: ignore
     if vector_store_type == VectorStoreType.LanceDB:
         db_uri = config.embeddings.vector_store["db_uri"]  # type: ignore
         lancedb_dir = Path(config.root_dir).resolve() / db_uri

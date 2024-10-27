@@ -27,3 +27,12 @@ class CacheConfig(BaseModel):
     storage_account_blob_url: str | None = Field(
         description="The storage account blob url to use.", default=None
     )
+    database_name: str | None = Field(
+        description="The database name to use.", default=None
+    )
+    account_name: str | None = Field(
+        description="The account name to use.", default=None
+    )
+    account_key: str | None = Field(
+        description="The account key to use.", default=None
+    )

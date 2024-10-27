@@ -66,7 +66,34 @@ class PipelineBlobStorageConfig(PipelineStorageConfig[Literal[StorageType.blob]]
     )
     """The storage account blob url."""
 
+class PipelineCosmosStorageConfig(PipelineStorageConfig[Literal[StorageType.cosmos]]):
+    """Represents the blob storage configuration for the pipeline."""
+
+    type: Literal[StorageType.cosmos] = StorageType.cosmos
+    """The type of storage."""
+
+    connection_string: str | None = pydantic_Field(
+        description="The cosmos connection string for the storage.", default=None
+    )
+    """The cosmos connection string for the storage."""
+
+    database_name: str = pydantic_Field(
+        description="The cosmos database name", default=None
+    )
+    """The cosmos database name."""
+
+    account_key: str | None = pydantic_Field(
+        description="The cosmos account key.", default=None
+    )
+    """The cosmos account key."""
+
+    account_name: str | None = pydantic_Field(
+        description="The cosmos account name.", default=None
+    )
+    """The cosmos account name."""
+    
+
 
 PipelineStorageConfigTypes = (
-    PipelineFileStorageConfig | PipelineMemoryStorageConfig | PipelineBlobStorageConfig
+    PipelineFileStorageConfig | PipelineMemoryStorageConfig | PipelineBlobStorageConfig | PipelineCosmosStorageConfig
 )

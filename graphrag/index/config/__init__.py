@@ -9,6 +9,7 @@ from .cache import (
     PipelineCacheConfigTypes,
     PipelineFileCacheConfig,
     PipelineMemoryCacheConfig,
+    PipelineCosmosCacheConfig,
     PipelineNoneCacheConfig,
 )
 from .input import (
@@ -29,6 +30,7 @@ from .storage import (
     PipelineBlobStorageConfig,
     PipelineFileStorageConfig,
     PipelineMemoryStorageConfig,
+    PipelineCosmosStorageConfig,
     PipelineStorageConfig,
     PipelineStorageConfigTypes,
 )
@@ -42,6 +44,7 @@ __all__ = [
     "PipelineBlobCacheConfig",
     "PipelineBlobReportingConfig",
     "PipelineBlobStorageConfig",
+    "PipelineCosmosStorageConfig",
     "PipelineCSVInputConfig",
     "PipelineCacheConfig",
     "PipelineCacheConfigTypes",
@@ -57,6 +60,7 @@ __all__ = [
     "PipelineMemoryCacheConfig",
     "PipelineMemoryCacheConfig",
     "PipelineMemoryStorageConfig",
+    "PipelineCosmosCacheConfig",
     "PipelineNoneCacheConfig",
     "PipelineReportingConfig",
     "PipelineReportingConfigTypes",

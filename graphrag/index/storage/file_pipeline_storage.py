@@ -147,7 +147,6 @@ class FilePipelineStorage(PipelineStorage):
         """Return the keys in the storage."""
         return os.listdir(self._root_dir)
 
-
 def join_path(file_path: str, file_name: str) -> Path:
     """Join a path and a file. Independent of the OS."""
     return Path(file_path) / Path(file_name).parent / Path(file_name).name

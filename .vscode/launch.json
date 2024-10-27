@@ -3,13 +3,24 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Do Indexing",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "poetry",
+			"args": [
+				"run", "graphrag", "index", 
+				"--emit", "cosmos",
+				"--root", "/home/adam/playground/graphrag/runs/ragtest"
+			],
+		},
+		{
 			"name": "Indexer",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "poetry",
 			"args": [
 				"poe", "index",
-				"--root", "<path_to_ragtest_root_demo>"
+				"--root", "/home/adam/playground/graphrag/runs/ragtest"
 			],
 		},
 		{

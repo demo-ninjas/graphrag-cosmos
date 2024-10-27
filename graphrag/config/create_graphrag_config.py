@@ -353,6 +353,9 @@ def create_graphrag_config(
                 storage_account_blob_url=reader.str(Fragment.storage_account_blob_url),
                 container_name=reader.str(Fragment.container_name),
                 base_dir=reader.str(Fragment.base_dir) or defs.CACHE_BASE_DIR,
+                database_name=reader.str(Fragment.storage_database_name),
+                account_name=reader.str(Fragment.storage_account_name),
+                account_key=reader.str(Fragment.storage_account_key),
             )
         with (
             reader.envvar_prefix(Section.reporting),
@@ -374,6 +377,9 @@ def create_graphrag_config(
                 storage_account_blob_url=reader.str(Fragment.storage_account_blob_url),
                 container_name=reader.str(Fragment.container_name),
                 base_dir=reader.str(Fragment.base_dir) or defs.STORAGE_BASE_DIR,
+                database_name=reader.str(Fragment.storage_database_name) or defs.STORAGE_DATABASE_NAME,
+                account_name=reader.str(Fragment.storage_account_name) or defs.STORAGE_ACCOUNT_NAME,
+                account_key=reader.str(Fragment.storage_account_key) or defs.STORAGE_ACCOUNT_KEY,
             )
         with reader.envvar_prefix(Section.chunk), reader.use(values.get("chunks")):
             group_by_columns = reader.list("group_by_columns", "BY_COLUMNS")
@@ -599,6 +605,9 @@ class Fragment(str, Enum):
     rpm = "REQUESTS_PER_MINUTE"
     sleep_recommendation = "SLEEP_ON_RATE_LIMIT_RECOMMENDATION"
     storage_account_blob_url = "STORAGE_ACCOUNT_BLOB_URL"
+    storage_database_name = "DATABASE_NAME"
+    storage_account_key = "ACCOUNT_KEY"
+    storage_account_name = "ACCOUNT_NAME"
     thread_count = "THREAD_COUNT"
     thread_stagger = "THREAD_STAGGER"
     tpm = "TOKENS_PER_MINUTE"

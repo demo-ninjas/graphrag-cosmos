@@ -23,6 +23,7 @@ from graphrag.index.config.cache import (
     PipelineCacheConfigTypes,
     PipelineFileCacheConfig,
     PipelineMemoryCacheConfig,
+    PipelineCosmosCacheConfig,
     PipelineNoneCacheConfig,
 )
 from graphrag.index.config.input import (
@@ -43,6 +44,7 @@ from graphrag.index.config.storage import (
     PipelineBlobStorageConfig,
     PipelineFileStorageConfig,
     PipelineMemoryStorageConfig,
+    PipelineCosmosStorageConfig,
     PipelineStorageConfigTypes,
 )
 from graphrag.index.config.workflow import (
@@ -498,6 +500,23 @@ def _get_storage_config(
                 base_dir=settings.storage.base_dir,
                 storage_account_blob_url=storage_account_blob_url,
             )
+        case StorageType.cosmos:
+            database_name = settings.storage.database_name
+            connection_string = settings.storage.connection_string
+            account_name = settings.storage.account_name
+            account_key = settings.storage.account_key
+            if database_name is None:
+                msg = "Database name must be provided for cosmos storage."
+                raise ValueError(msg)
+            if connection_string is None and account_name is None:
+                msg = "You must provide either a Connection string or a cosmos account name."
+                raise ValueError(msg)
+            return PipelineCosmosStorageConfig(
+                database_name=database_name,
+                connection_string=connection_string,
+                account_name=account_name,
+                account_key=account_key,
+            )
         case _:
             # relative to the root_dir
             base_dir = settings.storage.base_dir
@@ -534,6 +553,23 @@ def _get_cache_config(
                 container_name=container_name,
                 base_dir=settings.cache.base_dir,
                 storage_account_blob_url=storage_account_blob_url,
+            )
+        case CacheType.cosmos:
+            database_name = settings.cache.database_name
+            connection_string = settings.cache.connection_string
+            account_name = settings.cache.account_name
+            account_key = settings.cache.account_key
+            if database_name is None:
+                msg = "Database name must be provided for cosmos cache."
+                raise ValueError(msg)
+            if connection_string is None and account_name is None:
+                msg = "You must provide either a Connection string or a cosmos account name."
+                raise ValueError(msg)
+            return PipelineCosmosCacheConfig(
+                database_name=database_name,
+                connection_string=connection_string,
+                account_name=account_name,
+                account_key=account_key,
             )
         case _:
             # relative to root dir

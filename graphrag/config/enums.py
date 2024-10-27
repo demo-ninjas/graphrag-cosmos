@@ -19,6 +19,8 @@ class CacheType(str, Enum):
     """The none cache configuration type."""
     blob = "blob"
     """The blob cache configuration type."""
+    cosmos = "cosmos"
+    """The cosmos cache configuration type."""
 
     def __repr__(self):
         """Get a string representation."""
@@ -60,6 +62,8 @@ class StorageType(str, Enum):
     """The memory storage type."""
     blob = "blob"
     """The blob storage type."""
+    cosmos = "cosmos"
+    """The cosmos storage type."""
 
     def __repr__(self):
         """Get a string representation."""

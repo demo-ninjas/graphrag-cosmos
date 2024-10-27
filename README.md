@@ -1,4 +1,6 @@
-# GraphRAG
+# GraphRAG + CosmosDB Support
+
+> This is a fork of the original GraphRAG repo with added support for using CosmosDB as the backend
 
 👉 [Use the GraphRAG Accelerator solution](https://github.com/Azure-Samples/graphrag-accelerator) <br/>
 👉 [Microsoft Research Blog Post](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/)<br/>

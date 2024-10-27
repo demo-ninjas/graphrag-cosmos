@@ -8,6 +8,9 @@ from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
 from typing import Any
 
+from io import BytesIO
+import pandas as pd
+
 from graphrag.logging import ProgressReporter
 
 
@@ -80,3 +83,29 @@ class PipelineStorage(metaclass=ABCMeta):
     @abstractmethod
     def keys(self) -> list[str]:
         """List all keys in the storage."""
+
+    async def load_table(self, name: str) -> pd.DataFrame:        
+        """Load a table from the storage.
+
+        Args:
+            - name - The name of the table to load.
+
+        Returns
+        -------
+            - output - The loaded table.
+        """
+        if not await self.has(name):
+            msg = f"Could not find {name} in storage!"
+            raise ValueError(msg)
+        
+        if name.endswith(".csv"):
+            return pd.read_csv(BytesIO(await self.get(name, as_bytes=True)))
+        elif name.endswith(".parquet"):
+            return pd.read_parquet(BytesIO(await self.get(name, as_bytes=True)))
+        elif name.endswith(".feather"):
+            return pd.read_feather(BytesIO(await self.get(name, as_bytes=True)))
+        elif name.endswith(".json"):
+            return pd.read_json(BytesIO(await self.get(name, as_bytes=True)))
+        else:
+            raise ValueError(f"Unsupported file format: {name}")
+        raise NotImplementedError

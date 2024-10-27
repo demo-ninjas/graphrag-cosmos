@@ -45,7 +45,7 @@ async def create_final_nodes(
         ),
     )
 
-    nodes_without_positions = nodes.drop(columns=["x", "y"])
+    nodes_without_positions = nodes.drop(columns=["x", "y"], errors="ignore")
 
     nodes = nodes[nodes["level"] == level_for_node_positions].reset_index(drop=True)
     nodes = cast(pd.DataFrame, nodes[["id", "x", "y"]])
